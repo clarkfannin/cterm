@@ -6,5 +6,14 @@
     "debounce": {
         "isEnabled": true,
         "delay": 300
+    },
+    "xterm_theme": {
+        "theme": {
+            "background": "darkslategray",
+            "foreground": "white"
+        }
+    },
+    "autocomplete_color": {
+        "hex_color": "#FFA"
     }
 }
