@@ -1,7 +1,7 @@
 # cterm
 c for (auto)complete, and clark
 
- Mac terminal app built with Electron and Xterm.js with autocomplete
+ Mac terminal app with autocomplete, built with Electron and Xterm.js
  - configure custom commands via `commands.txt` or optional LLM
  - see `settings.json` for available settings
  
