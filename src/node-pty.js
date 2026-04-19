@@ -1,26 +1,28 @@
 import * as os from "node:os";
 import * as pty from "node-pty";
-import { ipcMain } from "electron";
+import {ipcMain} from "electron";
+import settings from "../settings.json" with {type: "json"};
+import {createZdotdir} from "./utils/zdotdir.js";
 
 const shell = os.platform() === "win32" ? "powershell.exe" : (process.env.SHELL || "/bin/zsh");
 
 export const createPty = (win) => {
-	const ptyProcess = pty.spawn(shell, [], {
-		name: "xterm-color",
-		cols: 80,
-		rows: 30,
-		cwd: process.env.HOME,
-		env: {
-			...process.env,
-			PROMPT: "%F{red}%1~%f %F{yellow}➜%f ",
-		},
-	});
+    const promptStr = `%F{${settings.directory_color}}%d ~%f %F{${settings.delimiter_color}}${settings.delimiter_char}%f `;
+    const zdotdir = createZdotdir(promptStr);
 
-	ptyProcess.onData((data) => win.webContents.send("output", data));
+    const ptyProcess = pty.spawn(shell, [], {
+        name: "xterm-color",
+        cols: 80,
+        rows: 30,
+        cwd: process.env.HOME,
+        env: {...process.env, ZDOTDIR: zdotdir},
+    });
 
-	ipcMain.on("keystroke", (_, data) => ptyProcess.write(data));
+    ptyProcess.onData((data) => win.webContents.send("output", data));
 
-	win.on("closed", () => ptyProcess.kill());
+    ipcMain.on("keystroke", (_, data) => ptyProcess.write(data));
 
-	return ptyProcess;
+    win.on("closed", () => ptyProcess.kill());
+
+    return ptyProcess;
 };

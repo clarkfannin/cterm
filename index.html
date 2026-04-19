@@ -10,7 +10,7 @@
     <title>cterm</title>
     <style>
         html, body {
-            margin: 0;
+            margin: 4px;
             height: 100%;
         }
 
@@ -24,6 +24,7 @@
 <div id="xtermContainer"></div>
 <script type="module">
     import settings from "/settings.json" with {type: "json"};
+
     document.documentElement.style.background = settings.xterm_theme.theme.background;
 </script>
 <script type="module" src="/src/terminal.js"></script>

@@ -6,6 +6,7 @@ import {trie} from "./trie.js";
 
 const term = new Terminal(settings.xterm_theme);
 term.open(document.getElementById("xtermContainer"));
+term.focus();
 
 const fetchLLMSuggestions = async (query) => {
     const res = await fetch("http://127.0.0.1:11434/api/generate", {
@@ -66,7 +67,7 @@ const hexToAnsi = (hex) => {
     const n = parseInt(h, 16);
     return `\x1b[38;2;${(n >> 16) & 255};${(n >> 8) & 255};${n & 255}m`;
 };
-const ghostColor = hexToAnsi(settings.autocomplete_color.hex_color);
+const ghostColor = hexToAnsi(settings.autocomplete_hex_color);
 
 const renderSuggestion = (suggestion) => {
     currentSuggestion = suggestion || "";

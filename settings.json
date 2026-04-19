@@ -13,7 +13,8 @@
             "foreground": "white"
         }
     },
-    "autocomplete_color": {
-        "hex_color": "#FFA"
-    }
+    "directory_color": "#FFF",
+    "delimiter_color": "#FFF",
+    "delimiter_char": "﹪",
+    "autocomplete_hex_color": "#FFA"
 }
