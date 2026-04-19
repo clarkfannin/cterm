@@ -9,4 +9,4 @@ c for (auto)complete, and clark
 npm run build
 npm run package
 
-app will appear in `release/auto-term-darwin-arm64/`
+app will appear in `release/cterm-darwin-arm64/`
