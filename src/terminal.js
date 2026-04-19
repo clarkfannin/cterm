@@ -116,6 +116,18 @@ term.onData((data) => {
         return;
     }
 
+    // arrow keys / any escape sequence: let the shell handle it, drop local state
+    if (data.startsWith("\x1b")) {
+        if (currentSuggestion) {
+            term.write("\x1b[K");
+            currentSuggestion = "";
+        }
+        line = "";
+        requestId++; // invalidate any pending suggestion
+        window.electron.send("keystroke", data);
+        return;
+    }
+
     // tab
     if (data === "\t" && currentSuggestion) {
         window.electron.send("keystroke", currentSuggestion);

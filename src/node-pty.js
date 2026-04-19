@@ -21,6 +21,7 @@ export const createPty = (win) => {
 
     let cwd = process.env.HOME;
     ptyProcess.onData((data) => {
+        // OSC 7 escape sequence - CWD
         const m = data.match(/\x1b\]7;file:\/\/([^\x1b\x07]+)/);
         if (m) cwd = decodeURIComponent(m[1]);
         win.webContents.send("output", data);
@@ -28,7 +29,11 @@ export const createPty = (win) => {
 
     ipcMain.on("keystroke", (_, data) => ptyProcess.write(data));
     ipcMain.handle("list-cwd", () => {
-        try { return fs.readdirSync(cwd); } catch { return []; }
+        try {
+            return fs.readdirSync(cwd);
+        } catch {
+            return [];
+        }
     });
 
     win.on("closed", () => ptyProcess.kill());
