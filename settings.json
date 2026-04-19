@@ -1,6 +1,6 @@
 {
     "llm": {
-        "isEnabled": false,
+        "isEnabled": true,
         "model": "qwen2.5-coder:1.5b-base"
     },
     "debounce": {

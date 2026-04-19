@@ -1,4 +1,5 @@
 import * as os from "node:os";
+import * as fs from "node:fs";
 import * as pty from "node-pty";
 import {ipcMain} from "electron";
 import settings from "../settings.json" with {type: "json"};
@@ -18,9 +19,17 @@ export const createPty = (win) => {
         env: {...process.env, ZDOTDIR: zdotdir},
     });
 
-    ptyProcess.onData((data) => win.webContents.send("output", data));
+    let cwd = process.env.HOME;
+    ptyProcess.onData((data) => {
+        const m = data.match(/\x1b\]7;file:\/\/([^\x1b\x07]+)/);
+        if (m) cwd = decodeURIComponent(m[1]);
+        win.webContents.send("output", data);
+    });
 
     ipcMain.on("keystroke", (_, data) => ptyProcess.write(data));
+    ipcMain.handle("list-cwd", () => {
+        try { return fs.readdirSync(cwd); } catch { return []; }
+    });
 
     win.on("closed", () => ptyProcess.kill());
 

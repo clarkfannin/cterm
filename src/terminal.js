@@ -9,12 +9,14 @@ term.open(document.getElementById("xtermContainer"));
 term.focus();
 
 const fetchLLMSuggestions = async (query) => {
+    const files = await window.electron.invoke("list-cwd");
+    const context = files.length ? `# files in cwd: ${files.join(", ")}\n` : "";
     const res = await fetch("http://127.0.0.1:11434/api/generate", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
             model: settings.llm.model,
-            prompt: `<|fim_prefix|>${query}<|fim_suffix|><|fim_middle|>`,
+            prompt: `<|fim_prefix|>${context}${query}<|fim_suffix|><|fim_middle|>`,
             stream: false,
             options: {
                 temperature: 0.1,
@@ -30,6 +32,9 @@ const fetchLLMSuggestions = async (query) => {
         }),
     });
     const {response} = await res.json();
+    const full = query + (response || "");
+    // filter out rm commands (yikes)
+    if (/(^|[;&|\s])rm(\s|$)/.test(full)) return "";
     return response;
 };
 

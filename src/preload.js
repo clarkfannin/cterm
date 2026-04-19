@@ -4,4 +4,5 @@ contextBridge.exposeInMainWorld("electron", {
 	send: (channel, data) => ipcRenderer.send(channel, data),
 	on: (channel, callback) =>
 		ipcRenderer.on(channel, (event, data) => callback(data)),
+	invoke: (channel, data) => ipcRenderer.invoke(channel, data),
 });
