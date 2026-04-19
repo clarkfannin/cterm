@@ -1,5 +1,5 @@
 {
-  "name": "auto-term",
+  "name": "cterm",
   "version": "1.0.0",
   "description": "mac terminal app with llm autocomplete",
   "license": "ISC",
@@ -10,7 +10,7 @@
     "dev": "vite",
     "start": "electron .",
     "build": "vite build",
-    "package": "npm run build && electron-rebuild && electron-packager . auto-term --platform=darwin --arch=arm64 --overwrite --out=release --asar.unpack=\"**/node_modules/node-pty/**\" && cp build/icon.icns release/auto-term-darwin-arm64/auto-term.app/Contents/Resources/electron.icns && /usr/bin/touch release/auto-term-darwin-arm64/auto-term.app",
+    "package": "npm run build && electron-rebuild && electron-packager . cterm --platform=darwin --arch=arm64 --overwrite --out=release --asar.unpack=\"**/node_modules/node-pty/**\" && cp build/icon.icns release/cterm-darwin-arm64/cterm.app/Contents/Resources/electron.icns && /usr/bin/touch release/cterm-darwin-arm64/cterm.app",
     "test": "npm run test"
   },
   "devDependencies": {

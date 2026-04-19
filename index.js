@@ -4,7 +4,7 @@ import {startOllama} from "./src/utils/start-ollama.js";
 import settings from "./settings.json" with {type: "json"};
 
 let ollamaProcess;
-if (settings.llm.isEnabled) ollamaProcess = startOllama();
+if (settings.llm.isEnabled) ollamaProcess = await startOllama();
 
 const createWindow = () => {
     const win = new BrowserWindow({
