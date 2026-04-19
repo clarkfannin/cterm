@@ -1,0 +1,10 @@
+{
+    "llm": {
+        "isEnabled": false,
+        "model": "qwen2.5-coder:1.5b-base"
+    },
+    "debounce": {
+        "isEnabled": true,
+        "delay": 300
+    }
+}

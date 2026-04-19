@@ -1,0 +1,27 @@
+{
+  "name": "auto-term",
+  "version": "1.0.0",
+  "description": "mac terminal app with llm autocomplete",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "start": "electron .",
+    "build": "vite build",
+    "package": "npm run build && electron-rebuild && electron-packager . auto-term --platform=darwin --arch=arm64 --overwrite --out=release --asar.unpack=\"**/node_modules/node-pty/**\" && cp build/icon.icns release/auto-term-darwin-arm64/auto-term.app/Contents/Resources/electron.icns && /usr/bin/touch release/auto-term-darwin-arm64/auto-term.app",
+    "test": "npm run test"
+  },
+  "devDependencies": {
+    "@electron/packager": "^19.1.0",
+    "@electron/rebuild": "^4.0.3",
+    "electron": "^41.2.1",
+    "ps-node": "^0.1.6",
+    "vite": "^8.0.8"
+  },
+  "dependencies": {
+    "@xterm/xterm": "^6.0.0",
+    "node-pty": "^1.1.0"
+  }
+}

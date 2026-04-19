@@ -1,0 +1,71 @@
+jekyll serve -l
+shopify theme pull -d
+shopify theme dev --store=
+npm run watch:dev:web
+git add .
+git commit -m "
+git checkout
+git checkout -b "
+git status
+git pull
+git push
+git push -u origin
+git branch
+git branch -d
+git log --oneline
+git diff
+git stash
+git stash pop
+git merge
+git rebase
+git clone
+git remote -v
+npm install
+npm run dev
+npm run build
+npm run start
+npm run test
+npm run lint
+npm test
+npx
+yarn
+yarn add
+yarn dev
+pnpm install
+pnpm add
+pnpm dev
+clear
+cd
+cd ..
+ls
+ls -la
+mkdir
+rm -rf
+cp
+mv
+cat
+touch
+chmod +x
+grep -r
+find . -name
+curl
+ssh
+docker ps
+docker compose up
+docker compose down
+docker build -t
+docker run
+kubectl get pods
+kubectl logs
+kubectl describe
+brew install
+brew update
+brew upgrade
+python3
+python3 -m venv
+pip install
+pip install -r requirements.txt
+source venv/bin/activate
+code .
+open .
+exit
